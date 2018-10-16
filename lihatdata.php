@@ -1,11 +1,5 @@
 <?php
-
 require_once("db.php");
-
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +8,10 @@ require_once("db.php");
 <table>
 
 <td>
-    <a href="search.php"> Carin Data </a>
+
+    <form action="search.php" method="get"> 
+    <input type="text" name="cari" id="cari" placeholder="Cari Nim Mahasiswa">
+    <input type="submit" name="search" value="cari">
 </td>
 <tr>
     <th>Nama</th>
@@ -31,14 +28,14 @@ if(mysqli_num_rows($result) > 0){
         <tr>
             <td><?php echo $row['nama']?></td>
             <td><?php echo $row['nim']?></td>
-            <td> <a href="delete.php?nim=<?php echo $row['nim']?>">delete</a>
+            <td> <a href="delete.php?nim=<?php echo $row['nim']?>">delete </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+                <a href="detail.php?nim=<?php echo $row['nim']?>">Detail</a></td>
 
             </tr>
             <?php
     }
 }else{
     echo "0 Result";
-
 }
 mysqli_close($conn);
 ?>
