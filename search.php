@@ -1,18 +1,45 @@
 <?php
-echo ("<h3>Hasil Pencarian</h3>");
+require_once("db.php");
+$value = $_GET["cari"];
 
-mysql_connect("localhost","","");
-mysqli_select_db("TEST_DB");
+$sql = "SELECT * FROM pendataan where nim like '%$value%'";
+?>
 
-$perintah = "SELECT data where nim like '%cari%'";
-$hasil = mysql_query($perintah);
-$jumlah = mysql_num_rows($hasil);
-if($jumlah>0){
-	echo ("Data yang ditemukan : $jumlah<br><br>");
-	while ($data=mysql_fetch_row($hasil)) {
-		echo ("Nama : $data[1]<br><br>");
-		echo ("Alamat	: $data[2]<br><br>");
-	}
-}else{
-	echo ("maaf, data yang anda cari tidak ada");
-}?>
+<html>
+    <body>
+        <table border="1">
+            <tr>
+                <th>Nama</th>
+                <th>Nim</th>
+                <th>Aksi</th>
+            </tr>
+<?php
+$result = mysqli_query($conn,$sql);
+$row = mysqli_num_rows($result);
+if(mysqli_num_rows($result) > 0){
+    while ($row = mysqli_fetch_assoc($result)){
+        ?>
+        <tr>
+            <td><?php echo $row['nama']?></td>
+            <td><?php echo $row['nim']?></td>
+            <td> <a href="delete.php?nim=<?php echo $row['nim']?>">delete</a>
+
+            </tr>
+            <?php
+
+        }
+
+    }else{
+        echo "0 result";
+    }
+
+    mysqli_close($conn);
+
+    ?>
+      <table>
+      <a href="lihatdata.php">kembali kelihat data</a>
+</body>
+
+
+</html>
+
