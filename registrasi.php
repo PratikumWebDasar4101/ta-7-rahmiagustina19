@@ -1,44 +1,4 @@
-<?php
 
-session_start();
-
-if(isset($_SESSION["pesan_nama"]) || isset($_SESSION["pesan_nim"]) || isset($_SESSION["pesan_email"])) {
-
-    if(isset($_SESSION["pesan_nama"])) {
-
-        $pesan_nama = $_SESSION["pesan_nama"];
-
-    }else {
-
-        $pesan_nama = "";
-
-    }
-
-    if(isset($_SESSION["pesan_nim"])) {
-
-        $pesan_nim = $_SESSION["pesan_nim"];
-
-    }else {
-
-        $pesan_nim = "";
-
-    }
-
-    if(isset($_SESSION["pesan_email"])) {
-
-        $pesan_email = $_SESSION["pesan_email"];
-
-    }else {
-
-        $pesan_email = "";
-
-    }
-
-    session_destroy();
-
-}
-
-?>
 
 <!DOCTYPE html>
 
@@ -53,83 +13,60 @@ if(isset($_SESSION["pesan_nama"]) || isset($_SESSION["pesan_nim"]) || isset($_SE
 
 <body>
 
-    <form action="submit.php" method="post">
+    <form action="submit.php" method="post" enctype="multipart/form-data">
 
-        <h1 align="left">Formulir Registrasi</h1>
+        <h1 align="center">Formulir Pendataan Mahasiswa</h1>
 
-        <table align="left">
+        <table align="center">
 
 			<tr>
 
 				<td>Nama</td>
-
 			</tr>
-
 			<tr>
-
 				<td>
-
-                    <input type="text" name="nama">
-
-                    <?php if(isset($_SESSION["pesan_nama"])) { ?>
-
-                    <p><?php echo $pesan_nama ?></p>
-
-                    <?php } ?>
-
-                </td>
-
+					<input type="text" name="nama" minlength="1" maxlength="20">
+				</td>
 			</tr>
-
 			<tr>
-
 				<td>NIM</td>
-
 			</tr>
 			<tr>
 
 				<td>
 
                     <input type="text" name="nim">
-
-                    <?php if(isset($_SESSION["pesan_nim"])) { ?>
-
-                    <p><?php echo $pesan_nim ?></p>
-
-                    <?php } ?>
-
-                </td>
-
+				</td>
 			</tr>
 			<tr>
 
 				<td>Jenis Kelamin</td>
-
 			</tr>
-
 			<tr>
-
 				<td>
 
-					<input type="radio" name="jk" value="laki-laki">Laki-laki
+					<input type="radio" name="jk" value="laki-laki" required>Laki-laki
 
-					<input type="radio" name="jk" value="perempuan">Perempuan
+					<input type="radio" name="jk" value="perempuan" required>Perempuan
 
 				</td>
 
 			</tr>
-
 			<tr>
 				<td>Prodi</td>
-				
-					<td><input type="radio" name="prodi" value="D3 Sistem Informasi">D3 Sistem Informasi</td>
-					<td><input type="radio" name="prodi" value="D4 Sistem Multimedia">D3 Sistem Multimedia</td>
-					<td><input type="radio" name="prodi" value="D3 Komputerisasi Akuntansi">D3 Komputerisasi Akuntansi</td>
-					<td><input type="radio" name="prodi" value="D3 Teknik Telekomunikasi">D3 Teknik Telekomunikasi</td>
-					<td><input type="radio" name="prodi" value="D3 Manajemen Pemasaran">D3 Manajemen Pemasaran</td>
-					<td><input type="radio" name="prodi" value="D3 Perhotelan">D3 Perhotelan</td>
-					<td><input type="radio" name="prodi" value="D3 Teknik Informatika">D3 Teknik Informatika</td>
-				
+			</tr>
+			<tr>
+				<td>
+					<select name="prodi">
+						<option value="D3 Sistem Informasi">D3 Sistem Informasi</option>
+						<option value="D3 Komputerisasi Akuntansi">D3 Komputerisasi Akuntansi</option>
+						<option value="D3 Teknik Telekomunikasi">D3 Teknik Telekomunikasi</option>
+						<option value="D3 Teknik Informatika">D3 Teknik Informatika</option>
+						<option value="D3 Manajemen Pemasaran">D3 Manajemen Pemasaran</option>
+						<option value="D3 Perhotelan">D3 Perhotelan</option>
+						<option value="D4 Sistem Multimedia">D4 Sistem Multimedia</option>
+					</select>
+				</td>
 			</tr>
 			<tr>
 
@@ -191,9 +128,6 @@ if(isset($_SESSION["pesan_nama"]) || isset($_SESSION["pesan_nim"]) || isset($_SE
 
 				<td align="left"><input type="submit" name="submit" value="Kirim"></td>
 
-			</tr>
-			<tr>
-				<td><a href="lihatmahasiswa.php">lihat mahasiswa</td>
 			</tr>
         </table>
 
